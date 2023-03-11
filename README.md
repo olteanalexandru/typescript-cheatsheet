@@ -128,7 +128,7 @@ plant.species = 'Green Plant';
 console.log(plant.species);
 ```
 ## static properties & methods
-## static properties & methods are attached to the class itself, not to the instances of the class
+ static properties & methods are attached to the class itself, not to the instances of the class
 ```
 class Helpers {
     static PI: number = 3.14;       
@@ -142,8 +142,8 @@ console.log(Helpers.calcCircumference(8));
 
 ```
 ## abstract classes
-## abstract classes are base classes from which other classes may be derived. They may not be instantiated directly.
-## abstract classes may contain implementation details for its members. The abstract keyword is used to define abstract classes as well as abstract methods within an abstract class.
+ abstract classes are base classes from which other classes may be derived. They may not be instantiated directly.
+ abstract classes may contain implementation details for its members. The abstract keyword is used to define abstract classes as well as abstract methods within an abstract class.
 ```
 abstract class Project {
     projectName: string = 'Default';
@@ -168,7 +168,7 @@ newProject.changeName('Super IT Project');
 console.log(newProject);
 ```
 ## private constructors
-## private constructors are used to prevent the class from being instantiated
+ private constructors are used to prevent the class from being instantiated
 ```
 class OnlyOne {
     private static instance: OnlyOne;
@@ -189,7 +189,7 @@ console.log(right.name);
 // right.name = 'Something else'; // error
 ```
 ## namespaces
-## namespaces are used to organize code into logical groups and to provide a way to handle name collisions
+ namespaces are used to organize code into logical groups and to provide a way to handle name collisions
 ```
 namespace MyMath {
     const PI = 3.14;
@@ -206,13 +206,13 @@ namespace MyMath {
 console.log(MyMath.calcCircumference(8));
 console.log(MyMath.calcRectangle(8, 20));
 ```
-## modules
-### modules are used to organize code into logical groups and to provide a way to handle name collisions
-### modules are executed within their own scope, not in the global scope; this means that variables, functions, classes, etc. declared in a module are not visible outside the module unless they are explicitly exported using one of the export forms. Conversely, to consume a variable, function, class, interface, etc. exported from a different module, it has to be imported using one of the import forms.
-### modules are declarative; the relationships between modules are specified in terms of imports and exports at the file level.
-## modules import one another using a module loader. At runtime the module loader is responsible for locating and executing all dependencies of a module before executing it. Popular JavaScript module loaders used in web applications are the CommonJS module loader for Node.js and Require.js module loader for Web applications.
-### modules are declarative; the relationships between modules are specified in terms of imports and exports at the file level and are enforced by a compiler.
-### modules are evaluated synchronously; this means that if module A imports module B, module B’s declarations are not visible in module A until B is evaluated. However, if there is a circular import between modules A and B, then the modules are evaluated in the order in which they are referenced.
+## modules -
+ modules are used to organize code into logical groups and to provide a way to handle name collisions
+ modules are executed within their own scope, not in the global scope; this means that variables, functions, classes, etc. declared in a module are not visible outside the module unless they are explicitly exported using one of the export forms. Conversely, to consume a variable, function, class, interface, etc. exported from a different module, it has to be imported using one of the import forms.
+ modules are declarative; the relationships between modules are specified in terms of imports and exports at the file level.
+ modules import one another using a module loader. At runtime the module loader is responsible for locating and executing all dependencies of a module before executing it. Popular JavaScript module loaders used in web applications are the CommonJS module loader for Node.js and Require.js module loader for Web applications.
+ modules are declarative; the relationships between modules are specified in terms of imports and exports at the file level and are enforced by a compiler.
+ modules are evaluated synchronously; this means that if module A imports module B, module B’s declarations are not visible in module A until B is evaluated. However, if there is a circular import between modules A and B, then the modules are evaluated in the order in which they are referenced.
 ```
 // module.ts
 export class SomeClass {
@@ -225,11 +225,11 @@ export class SomeClass {
  let someClass = new SomeClass();
  console.log(someClass.someProperty);
 ```
-## decorators
+## decorators -
 
-### decorators are functions that can be attached to classes, methods, accessors, properties, or parameters. Decorators use the form @expression, where expression must evaluate to a function that will be called at runtime with information about the decorated declaration.
-### decorators are a stage 2 proposal for JavaScript and are available as an experimental feature of TypeScript.
-### decorators are a TypeScript feature that allow you to add both annotations and a meta-programming syntax for class declarations and members. Decorators are a stage 2 proposal for JavaScript and are available as an experimental feature of TypeScript.
+ decorators are functions that can be attached to classes, methods, accessors, properties, or parameters. Decorators use the form @expression, where expression must evaluate to a function that will be called at runtime with information about the decorated declaration.
+ decorators are a stage 2 proposal for JavaScript and are available as an experimental feature of TypeScript.
+ decorators are a TypeScript feature that allow you to add both annotations and a meta-programming syntax for class declarations and members. Decorators are a stage 2 proposal for JavaScript and are available as an experimental feature of TypeScript.
  ```
 let logged = function(target: any, propertyName: string | Symbol) {
     console.log(target);
@@ -276,12 +276,12 @@ const plant = new Plant();
 (<any>plant).print();
 ```
 ## method decorator
-## a method decorator is declared just before a method declaration. The method decorator is applied to the Property Descriptor for the method, and can be used to observe, modify, or replace a method definition.
-## a method decorator cannot be used in a declaration file, or in any other ambient context (such as in the body of an ambient function expression).
-## a method decorator is applied when the class containing the decorated method is declared. The decorator is called as a function at runtime, with the following three arguments:
-## 1. For a static member, the constructor function of the class. For an instance member, the prototype of the class.
-## 2. The name of the member.
-## 3. The Property Descriptor for the member.
+ a method decorator is declared just before a method declaration. The method decorator is applied to the Property Descriptor for the method, and can be used to observe, modify, or replace a method definition.
+ a method decorator cannot be used in a declaration file, or in any other ambient context (such as in the body of an ambient function expression).
+ a method decorator is applied when the class containing the decorated method is declared. The decorator is called as a function at runtime, with the following three arguments:
+ 1. For a static member, the constructor function of the class. For an instance member, the prototype of the class.
+ 2. The name of the member.
+ 3. The Property Descriptor for the member.
 ```
 function editable(value: boolean) {
     return function(target: any, propName: string, descriptor: PropertyDescriptor) {
@@ -320,8 +320,8 @@ project.calcBudget = function() {
 project.calcBudget();
 ```
 ## parameter decorator
-### a parameter decorator is declared just before a parameter declaration. A parameter decorator is applied to the constructor function of the class for a static member, or the prototype of the class for an instance member.
-### a parameter decorator cannot be used in a declaration file, or in any other ambient context (such as in the body of an ambient function expression).
+ a parameter decorator is declared just before a parameter declaration. A parameter decorator is applied to the constructor function of the class for a static member, or the prototype of the class for an instance member.
+ a parameter decorator cannot be used in a declaration file, or in any other ambient context (such as in the body of an ambient function expression).
 ```
 function printInfo(target: any, methodName: string, paramIndex: number) {
     console.log('Target: ', target);
@@ -355,8 +355,10 @@ course.printStudentNumbers('anything', true);
 <p>
 ```
 
-## Inheritance - is a mechanism in which one object acquires all the properties and behaviors of a parent object. It is an important part of object-oriented programming (OOP) in which one class acquires the properties (methods and fields) of another. With the use of inheritance the information is made manageable in a hierarchical order.
-## encapsulation ( get / set) - is the mechanism of wrapping the data (variables) and code acting on the data (methods) together as a single unit. In encapsulation, the variables of a class will be hidden from other classes, and can be accessed only through the methods of their current class. Therefore, it is also known as data hiding.
+## Inheritance -
+ is a mechanism in which one object acquires all the properties and behaviors of a parent object. It is an important part of object-oriented programming (OOP) in which one class acquires the properties (methods and fields) of another. With the use of inheritance the information is made manageable in a hierarchical order.
+## encapsulation ( get / set) -
+ is the mechanism of wrapping the data (variables) and code acting on the data (methods) together as a single unit. In encapsulation, the variables of a class will be hidden from other classes, and can be accessed only through the methods of their current class. Therefore, it is also known as data hiding.
 ```
 
 class Person {
@@ -379,9 +381,10 @@ class Person {
     }
 }
 ```
-## PolyMorphism - is the ability of a variable, function, or object to take on many forms. The most common use of polymorphism in OOP occurs when a parent class reference is used to refer to a child class object.
-## Polymorphism reffering to interfaces and abstract classes - is a design principle that allows a class to be defined by its behavior and not by its attributes. Polymorphism is achieved by using abstract classes and interfaces.
-## Polymorphism reffering to inheritance - is a design principle that allows a class to be defined by its behavior and not by its attributes. Polymorphism is achieved by using inheritance.
+## PolyMorphism -
+ is the ability of a variable, function, or object to take on many forms. The most common use of polymorphism in OOP occurs when a parent class reference is used to refer to a child class object.
+ Polymorphism reffering to interfaces and abstract classes - is a design principle that allows a class to be defined by its behavior and not by its attributes. Polymorphism is achieved by using abstract classes and interfaces.
+ Polymorphism reffering to inheritance - is a design principle that allows a class to be defined by its behavior and not by its attributes. Polymorphism is achieved by using inheritance.
 ```
 class Car {
     protected name: string;
@@ -395,7 +398,8 @@ class Car {
     }
 }
 ```
-## Abstraction - is the process of hiding the implementation details from the user, only the functionality will be provided to the user. In other words, the user will have the information on what the object does instead of how it does it.
+## Abstraction -
+ is the process of hiding the implementation details from the user, only the functionality will be provided to the user. In other words, the user will have the information on what the object does instead of how it does it.
 ```
 
 class Car {
@@ -410,10 +414,10 @@ class Car {
     }
 }
 ```
-# Interfaces
+# Interfaces -
 
-## An interface is a syntactical contract that an entity should conform to. An interface defines the syntax that any entity must adhere to. Interfaces are used to achieve abstraction and also to support the concept of loose coupling in software design.
-## Interfaces are similar to abstract classes. Both define abstract members that are implemented in derived classes. However, interfaces define only abstract members, whereas abstract classes can define both abstract and non-abstract members. In addition, interfaces cannot contain implementation for their members, whereas abstract classes can. Members of an interface are public by default.
+ An interface is a syntactical contract that an entity should conform to. An interface defines the syntax that any entity must adhere to. Interfaces are used to achieve abstraction and also to support the concept of loose coupling in software design.
+ Interfaces are similar to abstract classes. Both define abstract members that are implemented in derived classes. However, interfaces define only abstract members, whereas abstract classes can define both abstract and non-abstract members. In addition, interfaces cannot contain implementation for their members, whereas abstract classes can. Members of an interface are public by default.
 ```
 
 interface NamedPerson {
@@ -454,7 +458,8 @@ greet(person);
         -A -  Abstraction
         -S -  Specialization
         -P -  Polymorphism
-## Creator - is a class that creates other objects. It is responsible for knowing which classes need to be instantiated. It is also responsible for knowing how the instances of these classes will be created and used.
+## Creator -
+ is a class that creates other objects. It is responsible for knowing which classes need to be instantiated. It is also responsible for knowing how the instances of these classes will be created and used.
 ```
 
 class Person {
@@ -475,7 +480,8 @@ class PersonFactory {
 
 const person = PersonFactory.createPerson('Max', 27);
 ```
-## Controller - is a class that controls the flow of data between the view and the model. It is responsible for knowing which data needs to be displayed and when. It is also responsible for knowing which model objects need to be updated and when.
+## Controller - 
+is a class that controls the flow of data between the view and the model. It is responsible for knowing which data needs to be displayed and when. It is also responsible for knowing which model objects need to be updated and when.
 
 ```
 class Person {
@@ -507,7 +513,8 @@ const personController = new PersonController();
 
 personController.addPerson('Max', 27);
 ```
-## High Cohesion - is a measure of how strongly related the responsibilities of a class are. A class with high cohesion is focused on a single responsibility and has a small number of instance variables. A class with low cohesion has many responsibilities and many instance variables.
+## High Cohesion - 
+is a measure of how strongly related the responsibilities of a class are. A class with high cohesion is focused on a single responsibility and has a small number of instance variables. A class with low cohesion has many responsibilities and many instance variables.
 ```
 class Person {
     private name: string;
@@ -538,7 +545,8 @@ const personController = new PersonController();
 
 personController.addPerson('Max', 27);
 ```
-## Low Coupling - is a measure of how dependent one class is on another. A class with low coupling depends on as few other classes as possible. A class with high coupling depends on many other classes.
+## Low Coupling -
+ is a measure of how dependent one class is on another. A class with low coupling depends on as few other classes as possible. A class with high coupling depends on many other classes.
 ```
 class Person {
     private name: string;
@@ -569,7 +577,8 @@ const personController = new PersonController();
 
 personController.addPerson('Max', 27);
 ```
-## Inversion of Control - is a design principle that allows the control flow of a program to be inverted. Inversion of control is achieved by using a framework that takes control of the flow of a program and delegates the execution of tasks to other objects.
+## Inversion of Control -
+ is a design principle that allows the control flow of a program to be inverted. Inversion of control is achieved by using a framework that takes control of the flow of a program and delegates the execution of tasks to other objects.
 ```
 
 class Car {
@@ -600,7 +609,8 @@ const carController = new CarController();
 
 carController.drive();
 ```
-## Dependency Injection - is a design pattern that allows the removal of hard-coded dependencies and makes it possible to change them, whether at runtime or compile time.
+## Dependency Injection -
+ is a design pattern that allows the removal of hard-coded dependencies and makes it possible to change them, whether at runtime or compile time.
 ```
 class cat {
     meow() {
