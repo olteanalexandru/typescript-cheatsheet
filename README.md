@@ -3,6 +3,7 @@
 
 
 ## interface
+```
 interface SomePerson {
     name: string;
     age: number;
@@ -19,20 +20,22 @@ user1 = {
     }
 };
 
-
+```
 ## type
+```
 type AddFn = (a: number, b: number) => number;  // type alias for function type (function signature)  
 let add: AddFn;                                  
 add = (n1: number, n2: number) => {
     return n1 + n2;
 };
-
+```
 
 ## simple types 
+```
 let name2: string = 'Max';
 let age: number = 30;
 let hasHobbies: boolean = true;
-
+```
 ## array types
 let hobbies: string[] = ['Sports', 'Cooking'];
 let hobbies2: any[] = ['Sports', 1, true];
