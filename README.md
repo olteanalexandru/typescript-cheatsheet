@@ -208,11 +208,7 @@ console.log(MyMath.calcRectangle(8, 20));
 ```
 ## modules -
  modules are used to organize code into logical groups and to provide a way to handle name collisions
- modules are executed within their own scope, not in the global scope; this means that variables, functions, classes, etc. declared in a module are not visible outside the module unless they are explicitly exported using one of the export forms. Conversely, to consume a variable, function, class, interface, etc. exported from a different module, it has to be imported using one of the import forms.
- modules are declarative; the relationships between modules are specified in terms of imports and exports at the file level.
- modules import one another using a module loader. At runtime the module loader is responsible for locating and executing all dependencies of a module before executing it. Popular JavaScript module loaders used in web applications are the CommonJS module loader for Node.js and Require.js module loader for Web applications.
- modules are declarative; the relationships between modules are specified in terms of imports and exports at the file level and are enforced by a compiler.
- modules are evaluated synchronously; this means that if module A imports module B, module B’s declarations are not visible in module A until B is evaluated. However, if there is a circular import between modules A and B, then the modules are evaluated in the order in which they are referenced.
+ modules are executed within their own scope, not in the global scope; this means that variables, functions, classes, etc. declared in a module are not visible outside the module unless they are explicitly exported using one of the export forms.  
 ```
 // module.ts
 export class SomeClass {
