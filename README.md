@@ -1,7 +1,8 @@
-# example of interface / types / classes / functions / enums / generics / namespaces / modules
-
-<details><summary>## interface</summary>
+<details><summary> # example of interface / types / functions / enums / generics / namespaces / modules</summary>
 <p> 
+
+
+## interface
 interface SomePerson {
     name: string;
     age: number;
@@ -18,19 +19,14 @@ user1 = {
     }
 };
 
-</p>
-</details>
 
-<details><summary>## type</summary>
-<p> 
+## type
 type AddFn = (a: number, b: number) => number;  // type alias for function type (function signature)  
 let add: AddFn;                                  
 add = (n1: number, n2: number) => {
     return n1 + n2;
 };
 
-</p>
-</details>
 
 ## simple types 
 let name2: string = 'Max';
@@ -53,6 +49,12 @@ enum Color {
 
 let myColor: Color = Color.Green;
 console.log(myColor);   // 1
+
+</p>
+</details>
+
+<details><summary> Classes </summary>
+<p> 
 
 # classes
 class Person {
@@ -332,8 +334,12 @@ class Course {
 const course = new Course('Super Course');
 course.printStudentNumbers('anything', true);
 
+</p>
+</details>
 
-# OOP - Object Oriented Programming core concepts brief overview
+<details><summary> # OOP - Object Oriented Programming core concepts brief overview</summary>
+<p>
+
 
 ## Inheritance - is a mechanism in which one object acquires all the properties and behaviors of a parent object. It is an important part of object-oriented programming (OOP) in which one class acquires the properties (methods and fields) of another. With the use of inheritance the information is made manageable in a hierarchical order.
 ## encapsulation ( get / set) - is the mechanism of wrapping the data (variables) and code acting on the data (methods) together as a single unit. In encapsulation, the variables of a class will be hidden from other classes, and can be accessed only through the methods of their current class. Therefore, it is also known as data hiding.
@@ -422,8 +428,20 @@ const person: NamedPerson = {
 
 greet(person);
 
+</p>
+</details>
+
 #GRASP - General Responsibility Assignment Software Patterns
 
+<details><summary> #GRASP - General Responsibility Assignment Software Patterns</summary>
+<p>
+
+ GRASP oop concepts:
+        -G -  Generalization 
+        -R -  Reusability
+        -A -  Abstraction
+        -S -  Specialization
+        -P -  Polymorphism
 ## Creator - is a class that creates other objects. It is responsible for knowing which classes need to be instantiated. It is also responsible for knowing how the instances of these classes will be created and used.
 
 
@@ -600,3 +618,6 @@ const cat = CatFactory.createCat();
 const catController = new CatController(cat);
 
 catController.meow();
+
+</p>
+</details>
