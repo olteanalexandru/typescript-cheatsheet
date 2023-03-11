@@ -1,6 +1,7 @@
 # example of interface / types / classes / functions / enums / generics / namespaces / modules
 
-## interface
+<details><summary>## interface</summary>
+<p> 
 interface SomePerson {
     name: string;
     age: number;
@@ -17,12 +18,19 @@ user1 = {
     }
 };
 
-## type
+</p>
+</details>
+
+<details><summary>## type</summary>
+<p> 
 type AddFn = (a: number, b: number) => number;  // type alias for function type (function signature)  
 let add: AddFn;                                  
 add = (n1: number, n2: number) => {
     return n1 + n2;
 };
+
+</p>
+</details>
 
 ## simple types 
 let name2: string = 'Max';
