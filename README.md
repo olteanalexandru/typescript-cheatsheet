@@ -441,11 +441,9 @@ const person: NamedPerson = {
 }
 
 greet(person);
-
+```
 </p>
 </details>
-```
-#GRASP - General Responsibility Assignment Software Patterns
 
 <details><summary> #GRASP - General Responsibility Assignment Software Patterns</summary>
 <p>
