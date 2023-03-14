@@ -639,3 +639,146 @@ catController.meow();
 ```
 </p>
 </details>
+
+
+
+<details><summary> Functional Programing / Async - await</summary>
+<p>
+
+##destructuring
+```
+let array = [1, 2, 3, 4, 5];
+
+let [a, b, c, d, e] = array;
+
+```
+
+##spread operator
+```
+let array = [1, 2, 3, 4, 5];
+
+let array2 = [...array, 6, 7, 8, 9, 10];
+
+```
+##rest operator
+```
+function sum(...args: number[]): number {
+    let sum = 0;
+    for (let arg of args) {
+        sum += arg;
+    }
+    return sum;
+    }
+
+```
+
+##default parameters
+```
+function sum(a: number, b: number = 0): number {
+    return a + b  ;
+    }
+```
+
+
+##arrow functions
+```
+let sum = (a: number, b: number): number => a + b;
+```
+
+#map / filter / reduce / sort / forEach / split / join / slice / splice / toString 
+
+#map
+map creates a new array with the results of calling a provided function on every element in the calling array.
+```
+let array = [1, 2, 3, 4, 5];
+let items = {
+    name: 'alex',price: 10,
+    name: 'alex2',price: 20,
+    name: 'alex3',price: 30,
+}
+```
+```
+let array2 = array.map((value) => value * 2); 
+let items2 = items.map((value) => value.price * 2);
+```
+#filter
+filter creates a new array with all elements that pass the test implemented by the provided function.
+```
+let array2 = array.filter((value) => value > 3);
+let items2 = items.filter((value) => value.price > 10);
+```
+#reduce
+reduce applies a function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
+```
+let array2 = array.reduce((accumulator, currentValue) => accumulator + currentValue);
+let items2 = items.reduce((accumulator, currentValue) => accumulator + currentValue.price);
+```
+#sort
+sort sorts the elements of an array in place and returns the sorted array.
+```
+let array2 = array.sort((a, b) => a - b);
+let items2 = items.sort((a, b) => a.price - b.price); //sort by price
+```
+#forEach
+forEach executes a provided function once for each array element.
+```
+array.forEach((value) => console.log(value));
+```
+#split
+split splits a String object into an array of strings by separating the string into substrings.
+```
+let string = '12345';
+
+let array = string.split('');
+```
+
+#join
+join joins all elements of an array into a string.
+```
+let string = array.join('');
+```
+
+#slice
+slice extracts a section of a string and returns it as a new string, without modifying the original string.
+```
+let string2 = string.slice(2);
+```
+
+#splice
+splice changes the contents of an array by removing or replacing existing elements and/or adding new elements in place.
+```
+let array2 = array.splice(2, 1);
+```
+toString
+toString returns a string representing the specified array and its elements.
+```
+let string = array.toString();
+```
+#async / await
+async / await is a way to write asynchronous code that looks synchronous.
+async / await is built on top of promises.
+asyncronous code is code that is not executed in order and is executed at a later time.
+it is superior to synchronous code because it does not block the execution of other code.
+
+```
+
+let asyncFunc = async () => {
+    try {
+        let MapFilter = await MapFilter();
+        return MapFilter;
+    } catch (error) {
+        console.log(error);
+    }
+    }
+
+let MapFilter = () => {
+    let array = [1, 2, 3, 4, 5];
+    let array2 = array.map((value) => value * 2).filter((value) => value > 3);
+    return array2;
+    }
+
+asyncFunc().then((result) => console.log(result));
+```
+
+</p>
+</details>
