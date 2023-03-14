@@ -343,13 +343,13 @@ class Course {
 
 const course = new Course('Super Course');
 course.printStudentNumbers('anything', true);
-
+```
 </p>
 </details>
 
 <details><summary> # OOP - Object Oriented Programming core concepts brief overview</summary>
 <p>
-```
+
 
 ## Inheritance -
  is a mechanism in which one object acquires all the properties and behaviors of a parent object. It is an important part of object-oriented programming (OOP) in which one class acquires the properties (methods and fields) of another. With the use of inheritance the information is made manageable in a hierarchical order.
