@@ -948,8 +948,9 @@ console.log(one2.name); // one
 ```
 ## map / filter / reduce prototype methods
 
-#map
-v
+# map
+
+```
 let myMap = [1, 2, 3, 4, 5].map((item) => {
   return item * 2;
 }
