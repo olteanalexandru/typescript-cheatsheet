@@ -787,6 +787,202 @@ asyncFunc().then((result) => console.log(result));
 
 
 
+<details><summary> 
+ SOLID</summary>
+<p>
+
+
+SOLID is a set of principles for object-oriented design and programming.
+
+# S - Single responsibility principle
+ A class should have one and only one reason to change, meaning that a class should have only one job.
+
+# O - Open/closed principle
+ Objects or entities should be open for extension, but closed for modification.
+
+# L - Liskov substitution principle
+ This principle states that "objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program."
+
+ # I - Interface segregation principle
+ This principle states that "many client-specific interfaces are better than one general-purpose interface."
+
+ # D - Dependency inversion principle
+ This principle states that "one should "depend upon abstractions, [not] concretions."
+
+## Single responsibility principle
+```
+class User {
+  constructor(name, email) {
+    this.name = name;
+    this.email = email;
+  }
+
+  changeEmail(newEmail) {
+    this.email = newEmail;
+  }
+}
+```
+# Open/closed principle
+```
+class Shape {
+  constructor(type) {
+    this.type = type;
+  }
+}
+
+class Circle extends Shape {
+  constructor() {
+    super('circle');
+  }
+}
+
+class Square extends Shape {
+  constructor() {
+    super('square');
+  }
+}
+
+class AreaCalculator {
+  constructor(shapes = []) {
+    this.shapes = shapes;
+  }
+
+  sum() {
+    return this.shapes.reduce((acc, shape) => {
+      if (shape.type === 'circle') {
+        acc += (shape.radius ** 2) * Math.PI;
+      }
+
+      if (shape.type === 'square') {
+        acc += shape.side ** 2;
+      }
+
+      return acc;
+    }, 0);
+  }
+}
+
+const calc = new AreaCalculator([
+  new Circle(2),
+  new Square(5),
+  new Square(6),
+]);
+
+console.log(calc.sum()); // 113.09733552923255
+```
+## Liskov substitution principle
+```
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+
+  walk() {
+    return `${this.name} is walking`;
+  }
+}
+
+class Employee extends Person {
+  constructor(name, title) {
+    super(name);
+    this.title = title;
+  }
+
+  walk() {
+    return `${this.name}, ${this.title}, is walking`;
+  }
+}
+
+const p = new Person('John');
+
+console.log(p.walk()); // John is walking
+
+
+```
+
+# Interface segregation principle
+```
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+
+  eat() {
+    return `${this.name} is eating`;
+  }
+
+  sleep() {
+    return `${this.name} is sleeping`;
+  }
+}
+
+
+
+```
+
+# Dependency inversion principle
+```
+class Fetch {
+  request(url) {
+    // return fetch(url).then(r => r.json());
+  }
+}
+
+class LocalStorage {
+  get() {
+    const dataFromLocalStorage = 'data from local storage';
+
+    return dataFromLocalStorage;
+  }
+}
+
+class FetchClient {
+
+  constructor() {
+    this.fetch = new Fetch();
+  }
+
+  clientGet() {
+    return this.fetch.request('vk.com');
+  }
+}
+
+class LocalStorageClient {
+
+  constructor() {
+    this.localStorage = new LocalStorage();
+  }
+
+  clientGet() {
+    return this.localStorage.get();
+  }
+}
+
+class Database {
+
+  constructor(client) {
+    this.client = client;
+  }
+
+  getData(key) {
+    return this.client.clientGet(key);
+  }
+}
+
+const db = new Database(new FetchClient());
+
+console.log(db.getData('rand')); // data from fetch
+
+const db2 = new Database(new LocalStorageClient());
+
+console.log(db2.getData('rand')); // data from local storage
+``` 
+
+</p>
+</details>
+
+
+
 
 <details><summary> 
  Functional programing concepts</summary>
