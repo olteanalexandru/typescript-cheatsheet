@@ -784,3 +784,215 @@ asyncFunc().then((result) => console.log(result));
 
 </p>
 </details>
+
+
+
+
+<details><summary> 
+ Functional programing concepts</summary>
+<p>
+ 1. Pure functions
+ 2. Immutability
+ 3. First class functions
+ 4. Higher order functio
+ 5. Currying
+ 6. Composition
+ 7. Point free style
+ 8. Lazy evaluation
+ 9. Recursion
+ 10. Referential transparency
+ 11. Algebraic data types
+ 12. Pattern matching
+ 13. Type classes
+ 14. Monads
+ 15. Functors
+ 16. Applicatives
+ 17. Monoids
+
+
+# 1. Pure functions
+ A pure function is a function that has no side effects and always returns the same result given the same arguments.
+ Pure functions are idempotent, meaning that they can be called multiple times with the same arguments without changing the result or state of the program.
+ Pure functions are also referentially transparent, meaning that they can be replaced with their return value without changing the behavior of the program.
+ Pure functions are easier to test, compose, and reason about than impure functions.
+
+# 2. Immutability
+ Immutability is a state in which an object cannot be modified after it is created.
+ Immutability is a core concept in functional programming.
+ Immutability makes it easier to reason about your code because you know that an object will never change.
+ Immutability also makes it easier to test your code because you don't have to worry about the state of an object changing during a test.
+ Immutability is also a performance optimization because it allows JavaScript engines to make certain assumptions about your code that they would not be able to make if your code were mutable.
+
+# 3. First class functions
+ A first class function is a function that can be assigned to a variable, passed as an argument to another function, or returned from another function.
+ First class functions are a core concept in functional programming.
+ First class functions allow you to abstract over actions, not just values.
+ First class functions allow you to treat functions as values and pass functions as arguments to other functions, which is called higher order functions.
+
+# 4. Higher order functions
+ A higher order function is a function that takes a function as an argument, returns a function, or both.
+ Higher order functions are a core concept in functional programming.
+ Higher order functions allow you to abstract over actions, not just values.
+ Higher order functions allow you to treat functions as values and pass functions as arguments to other functions, which is called higher order functions.
+
+# 5. Currying
+ Currying is the process of transforming a function that takes multiple arguments into a function that takes them one at a time.
+ Currying is a core concept in functional programming.
+ Currying is useful for partial application.
+ Currying is useful for creating reusable, composable functions.
+
+# 6. Composition
+ Composition is the process of combining two or more functions to produce a new function.
+ Composition is a core concept in functional programming.
+ Composition is useful for creating reusable, composable functions.
+
+```
+const compose = (f, g) => x => f(g(x));
+const toUpperCase = x => x.toUpperCase();
+const exclaim = x => x + '!';
+const shout = compose(exclaim, toUpperCase);
+shout('send in the clowns');
+```
+# 7. Point free style
+ Point free style is the process of composing functions without explicitly mentioning the arguments to the composed functions.
+ Point free style is a core concept in functional programming.
+ Point free style is useful for creating reusable, composable functions.
+
+# 8. Lazy evaluation
+ Lazy evaluation is the process of deferring the evaluation of an expression until its value is needed.
+ Lazy evaluation is a core concept in functional programming.
+ Lazy evaluation is useful for creating reusable, composable functions.
+
+```
+const repeat = (str, times) => {
+  let result = '';
+  for (let i = 0; i < times; i++) {
+    result += str;
+  }
+  return result;
+}
+```
+
+# 9. Recursion
+ Recursion is the process of defining something in terms of itself.
+ Recursion is a core concept in functional programming.
+ Recursion is useful for creating reusable, composable functions.
+```
+const repeat2 = (str, times, result = '') => {
+    if (times <= 0) {
+        return result;
+    }
+    return repeat(str, times - 1, result + str);
+    }
+const repeat3 = (str, times) => times <= 0 ? '' : repeat(str, times - 1, str + str);
+v
+
+
+# 10. Referential transparency
+ Referential transparency is the property of an expression that can be replaced with its value without changing the behavior of the program.
+
+# 11. Algebraic data types
+ An algebraic data type is a type that is defined by its values.
+ Algebraic data types are a core concept in functional programming.
+
+# 12. Pattern matching
+ Pattern matching is the process of checking a value against a pattern.
+
+# 13. Type classes
+ A type class is a set of types that share certain common behaviors.
+
+# 14. Monads
+ A monad is a type that implements the monad interface by providing a flatMap method.
+
+# 15. Functors
+ A functor is a type that implements the functor interface by providing a map method.
+
+# 16. Applicatives
+ An applicative is a type that implements the applicative interface by providing an ap method.
+
+# 17. Monoids
+ A monoid is a type that implements the monoid interface by providing an empty method and a concat method.
+
+
+
+
+
+# call by reference 
+ means that the object is passed by reference, not by value.
+ The reference is passed to the function, so if the function changes the object's properties, that change is visible outside the function, as shown in the following example:
+ ```
+const one = {
+  name: 'one',
+}
+
+const two = one;
+
+two.name = 'two';
+
+console.log(one.name); // two
+```
+# call by value
+ means that the object is passed by value, not by reference.
+ The value is passed to the function, so if the function changes the object's properties, that change is not visible outside the function, as shown in the following example:
+```
+const one2 = {
+  name: 'one',
+}
+
+const two2 = {
+  ...one2,
+};
+
+two2.name = 'two';
+
+console.log(one2.name); // one
+```
+## map / filter / reduce prototype methods
+
+#map
+v
+let myMap = [1, 2, 3, 4, 5].map((item) => {
+  return item * 2;
+}
+
+Array.prototype.myMap  = function (callback ) {
+  let result = [];
+  for (let i = 0; i < this.length; i++) {
+    result.push(callback(this[i], i, this));  // callback(item, index, array)
+  }
+  return result ;
+}
+
+```
+#filter
+```
+let myFilter = [1, 2, 3, 4, 5].filter((item) => {
+  return item > 2;
+}
+
+Array.prototype.myFilter = function (callback) {
+  let result = [];
+  for (let i = 0; i < this.length; i++) {
+    if (callback(this[i], i, this)) {  // callback(item, index, array)
+      result.push(this[i]);
+    }
+```
+#reduce
+```
+let myReduce = [1, 2, 3, 4, 5].reduce((acc, item) => {
+  return acc + item;
+}
+
+Array.prototype.myReduce = function (callback, initialValue) {
+  let acc = initialValue;
+  let i = 0;
+  if (initialValue === undefined) {
+    acc = this[0];
+    i = 1;
+  }
+  for (i; i < this.length; i++) {
+    acc = callback(acc, this[i], i, this);  // callback(acc, item, index, array)
+  }
+  return acc;
+}
+```
