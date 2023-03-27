@@ -791,7 +791,7 @@ asyncFunc().then((result) => console.log(result));
 <details><summary> 
  Functional programing concepts</summary>
 <p>
- 1. Pure functions
+ 1. Pure functions ,
  2. Immutability
  3. First class functions
  4. Higher order functio
@@ -885,8 +885,7 @@ const repeat2 = (str, times, result = '') => {
     return repeat(str, times - 1, result + str);
     }
 const repeat3 = (str, times) => times <= 0 ? '' : repeat(str, times - 1, str + str);
-v
-
+```
 
 # 10. Referential transparency
  Referential transparency is the property of an expression that can be replaced with its value without changing the behavior of the program.
