@@ -92,7 +92,7 @@ console.log(person.name, person.username);
 class Max extends Person {
     // name = 'Max'; // override name property
     constructor(username: string) {
-        super('Max', username);
+        super('Max', username);  // call parent constructor
         this.TheAge = 31;
     }
 }
@@ -350,7 +350,6 @@ course.printStudentNumbers('anything', true);
 <details><summary>  OOP - Object Oriented Programming core concepts brief overview</summary>
 <p>
 
-
 ## Inheritance -
  is a mechanism in which one object acquires all the properties and behaviors of a parent object. It is an important part of object-oriented programming (OOP) in which one class acquires the properties (methods and fields) of another. With the use of inheritance the information is made manageable in a hierarchical order.
 ## encapsulation ( get / set) -
@@ -437,7 +436,6 @@ const person: NamedPerson = {
     greet(lastName: string) {
         console.log("Hi, I am " + this.firstName + " " + lastName);
     }
-
 }
 
 greet(person);
@@ -448,7 +446,6 @@ greet(person);
 <details><summary> 
  SOLID</summary>
 <p>
-
 
 SOLID is a set of principles for object-oriented design and programming.
 
@@ -573,7 +570,6 @@ class Animal {
     return `${this.name} is sleeping`;
   }
 }
-
 
 
 ```
@@ -845,15 +841,15 @@ catController.meow();
 ```
 let array = [1, 2, 3, 4, 5];
 
-let [a, b, c, d, e] = array;
+let [a, b, c, d, e] = array;  // a = 1, b = 2, c = 3, d = 4, e = 5
 
 ```
 
 ## spread operator
 ```
-let array = [1, 2, 3, 4, 5];
+let array = [1, 2, 3, 4, 5];  
 
-let array2 = [...array, 6, 7, 8, 9, 10];
+let array2 = [...array, 6, 7, 8, 9, 10];  // array2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 ```
 ## rest operator
@@ -899,6 +895,7 @@ let items2 = items.map((value) => value.price * 2);
 ```
 # filter
 filter creates a new array with all elements that pass the test implemented by the provided function.
+
 ```
 let array2 = array.filter((value) => value > 3);
 let items2 = items.filter((value) => value.price > 10);
@@ -978,6 +975,8 @@ asyncFunc().then((result) => console.log(result));
 
 </p>
 </details>
+
+
 
 
 
@@ -1080,6 +1079,7 @@ const repeat2 = (str, times, result = '') => {
     }
     return repeat(str, times - 1, result + str);
     }
+
 const repeat3 = (str, times) => times <= 0 ? '' : repeat(str, times - 1, str + str);
 ```
 
@@ -1135,7 +1135,7 @@ const one2 = {
 }
 
 const two2 = {
-  ...one2,
+  ...one2,     
 };
 
 two2.name = 'two';
@@ -1195,3 +1195,91 @@ Array.prototype.myReduce = function (callback, initialValue) {
 
 </p>
 </details>
+
+
+<details><summary> 
+OOP - Func   Mixin pattern
+</summary>
+
+
+
+## Mixin pattern
+
+
+```
+1. Mixin Classes
+Two mixin classes are defined:
+
+CanSayHi: A class that provides a sayHi method.
+HasSuperPower: A class that provides a superpower method.
+
+```
+class CanSayHi {
+name ;
+sayHi() {
+   return `Hi, I am ${this.name}`;
+}
+}
+
+class HasSuperPower {
+heroName ;
+
+superpower() {
+   return `${this.heroName} can fly`;
+}
+
+}
+
+
+```
+2. Target Class
+The superHero class is the target class that will incorporate the mixins. It implements both CanSayHi and HasSuperPower.
+
+```
+
+class superHero implements CanSayHi, HasSuperPower {
+heroName 
+
+constructor(public name: string) {
+   this.heroName = name;
+}
+
+sayHi: () => string;
+superpower: () => string;
+
+}
+
+
+
+```
+3. Applying Mixins
+The applyMixins function is defined to apply mixins to the target class. It copies the methods from mixin classes to the target class prototype.
+ ```
+
+
+
+function applyMixins(derivedCtor: any, baseCtors: any[]) {
+baseCtors.forEach(baseCtor => {
+   Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+       derivedCtor.prototype[name] = baseCtor.prototype[name];
+   });
+});
+}
+
+
+
+```
+4. Usage
+Mixins are applied to the superHero class using applyMixins. An instance of superHero is then created, and both mixin methods are called.
+```
+
+ applyMixins(superHero, [CanSayHi, HasSuperPower]);
+
+let hero = new superHero('Superman');
+
+console.log(hero.sayHi());
+console.log(hero.superpower());
+</p>
+</details>
+
+
