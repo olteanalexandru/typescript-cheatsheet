@@ -1206,7 +1206,7 @@ OOP - Func   Mixin pattern
 ## Mixin pattern
 
 
-```
+
 1. Mixin Classes
 Two mixin classes are defined:
 
@@ -1230,8 +1230,10 @@ superpower() {
 
 }
 
-
 ```
+
+
+
 2. Target Class
 The superHero class is the target class that will incorporate the mixins. It implements both CanSayHi and HasSuperPower.
 
@@ -1248,10 +1250,10 @@ sayHi: () => string;
 superpower: () => string;
 
 }
-
-
-
 ```
+
+
+
 3. Applying Mixins
 The applyMixins function is defined to apply mixins to the target class. It copies the methods from mixin classes to the target class prototype.
  ```
@@ -1266,9 +1268,10 @@ baseCtors.forEach(baseCtor => {
 });
 }
 
+ ```
 
 
-```
+
 4. Usage
 Mixins are applied to the superHero class using applyMixins. An instance of superHero is then created, and both mixin methods are called.
 ```
@@ -1279,6 +1282,9 @@ let hero = new superHero('Superman');
 
 console.log(hero.sayHi());
 console.log(hero.superpower());
+
+```
+
 </p>
 </details>
 
