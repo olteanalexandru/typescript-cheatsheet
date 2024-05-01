@@ -451,18 +451,28 @@ SOLID is a set of principles for object-oriented design and programming.
 
 # S - Single responsibility principle
  A class should have one and only one reason to change, meaning that a class should have only one job.
-
 # O - Open/closed principle
  Objects or entities should be open for extension, but closed for modification.
-
+ --think of (if elses are ussualy a sign of violation of this principle and can be replaced with polymorphism )
+-- multiple classes could be created that implement the same interface and then the correct class is chosen at runtime or 
+-- make use of switches instead of if else statements
 # L - Liskov substitution principle
  This principle states that "objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program."
+ --objects of a superclass shall be replaceable with objects of its subclasses without affecting the functionality of the program
+--subclasses must implement all the methods of the superclass and not overwrite logic
+--subclasses should not throw exceptions that are not thrown by the superclass 
 
+
+-- in such cases the superclass should be refactored  or multiple interfaces/classes should be created to handle the different cases
  # I - Interface segregation principle
  This principle states that "many client-specific interfaces are better than one general-purpose interface."
-
+ --a client should never be forced to implement an interface that it doesn't use completely 
+--interfaces should be broken down into smaller interfaces that are specific to the client
  # D - Dependency inversion principle
  This principle states that "one should "depend upon abstractions, [not] concretions."
+--high level modules should not depend on low level modules
+--both should depend on abstractions ( think of middleMans that handle the communication between the two )
+
 
 ## Single responsibility principle
 ```
@@ -877,7 +887,7 @@ function sum(a: number, b: number = 0): number {
 let sum = (a: number, b: number): number => a + b;
 ```
 
-# map / filter / reduce / sort / forEach / split / join / slice / splice / toString 
+# Array / Object methods 
 
 # map
 map creates a new array with the results of calling a provided function on every element in the calling array.
@@ -892,7 +902,19 @@ let items = {
 ```
 let array2 = array.map((value) => value * 2); 
 let items2 = items.map((value) => value.price * 2);
+
+
+
 ```
+# flatMap
+flatMap first maps each element using a mapping function, then flattens the result into a new array. It is identical to a map followed by a flat of depth 1, but flatMap is often quite useful, as merging both into one method is slightly more efficient.
+```
+let array2 = array.flatMap((value) => [value, value * 2]);
+let items2 = items.flatMap((value) => [value.price, value.price * 2]);
+```
+
+
+
 # filter
 filter creates a new array with all elements that pass the test implemented by the provided function.
 
@@ -900,12 +922,83 @@ filter creates a new array with all elements that pass the test implemented by t
 let array2 = array.filter((value) => value > 3);
 let items2 = items.filter((value) => value.price > 10);
 ```
+
+# 
+
 # reduce
 reduce applies a function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
 ```
 let array2 = array.reduce((accumulator, currentValue) => accumulator + currentValue);
 let items2 = items.reduce((accumulator, currentValue) => accumulator + currentValue.price);
 ```
+
+# findIndex
+findIndex returns the index of the first element in the array that satisfies the provided testing function. Otherwise, it returns -1, indicating that no element passed the test.
+```
+let value = array.findIndex((value) => value > 3);
+let item = items.findIndex((value) => value.price > 10);
+```
+
+# find
+find returns the value of the first element in the array that satisfies the provided testing function.
+```
+let value = array.find((value) => value > 3);
+let item = items.find((value) => value.price > 10);
+```
+# some
+some tests whether at least one element in the array passes the test implemented by the provided function.
+```
+let value = array.some((value) => value > 3);
+let item = items.some((value) => value.price > 10);
+```
+# every
+every tests whether all elements in the array pass the test implemented by the provided function.
+```
+let value = array.every((value) => value > 3);
+let item = items.every((value) => value.price > 10);
+```
+# includes
+includes determines whether an array includes a certain value among its entries, returning true or false as appropriate.
+```
+let value = array.includes(3);
+let item = items.includes(10);
+```
+
+# indexOf
+indexOf returns the first index at which a given element can be found in the array, or -1 if it is not present.
+```
+let value = array.indexOf(3);
+let item = items.indexOf(10);
+```
+# push
+push adds one or more elements to the end of an array and returns the new length of the array.
+```
+array.push(4);
+array.push(5, 6);
+```
+# pop
+pop removes the last element from an array and returns that element.
+```
+let value = array.pop();
+```
+# shift
+shift removes the first element from an array and returns that element.
+```
+let value = array.shift();
+```
+# unshift
+unshift adds one or more elements to the beginning of an array and returns the new length of the array.
+```
+array.unshift(0);
+array.unshift(-1, -2);
+```
+# concat
+concat merges two or more arrays and returns a new array.
+```
+let array2 = array.concat([6, 7, 8, 9, 10]);
+```
+
+
 # sort
 sort sorts the elements of an array in place and returns the sorted array.
 ```
@@ -975,6 +1068,247 @@ asyncFunc().then((result) => console.log(result));
 
 </p>
 </details>
+
+<details><summary> 
+  String functional methods and other useful methods </summary>
+<p>
+
+# String methods
+# charAt
+charAt returns the character at the specified index in a string.
+```
+let string = 'hello';
+
+let char = string.charAt(0);
+```
+# charCodeAt
+charCodeAt returns the Unicode of the character at the specified index in a string.
+```
+let string = 'hello';
+
+let charCode = string.charCodeAt(0);
+```
+# concat
+concat joins two or more strings and returns a new string.
+```
+let string2 = string.concat(' world');
+```
+# includes
+includes determines whether one string may be found within another string, returning true or false as appropriate.
+```
+let value = string.includes('ell');
+```
+# indexOf
+indexOf returns the index within the calling String object of the first occurrence of the specified value, starting the search at fromIndex. Returns -1 if the value is not found.
+```
+let value = string.indexOf('l');
+```
+# lastIndexOf
+lastIndexOf returns the index within the calling String object of the last occurrence of the specified value, searching backwards from fromIndex. Returns -1 if the value is not found.
+```
+let value = string.lastIndexOf('l');
+```
+# match
+match retrieves the result of matching a string against a regular expression.
+```
+let value = string.match(/l/g);
+```
+# replace
+replace searches a string for a specified value, or a regular expression, and returns a new string where the specified values are replaced.
+```
+let string2 = string.replace('l', 'L');
+```
+# search
+search searches a string for a specified value, or regular expression, and returns the position of the match.
+```
+let value = string.search('l');
+```
+# slice
+slice extracts a section of a string and returns it as a new string, without modifying the original string.
+```
+let string2 = string.slice(2);
+```
+# split
+split splits a String object into an array of strings by separating the string into substrings.
+```
+let value = string.split('l');
+```
+# substr
+substr extracts parts of a string, beginning at the character at the specified position, and returns the specified number of characters.
+```
+let value = string.substr(2, 3);
+```
+# substring
+substring extracts parts of a string, between the start and end indexes, and returns the specified number of characters.
+```
+let value = string.substring(2, 4);
+```
+# toLowerCase
+toLowerCase converts a string to lowercase letters.
+```
+let string2 = string.toLowerCase();
+```
+# toUpperCase
+toUpperCase converts a string to uppercase letters.
+```
+let string2 = string.toUpperCase();
+```
+# trim
+trim removes whitespace from both ends of a string.
+```
+let string2 = ' hello ';
+
+let string3 = string2.trim();
+```
+# padStart
+padStart pads the current string with another string until the resulting string reaches the given length.
+```
+let string2 = string.padStart(10, '0');
+```
+# padEnd
+padEnd pads the current string with another string until the resulting string reaches the given length.
+```
+let string2 = string.padEnd(10, '0');
+```
+# repeat
+repeat returns a new string with a specified number of copies of the string it was called on.
+```
+let string2 = string.repeat(3);
+```
+# startsWith
+startsWith determines whether a string begins with the characters of a specified string, returning true or false as appropriate.
+```
+let value = string.startsWith('he');
+```
+# endsWith
+endsWith determines whether a string ends with the characters of a specified string, returning true or false as appropriate.
+```
+let value = string.endsWith('lo');
+```
+# trimStart
+trimStart removes whitespace from the beginning of a string.
+```
+let string2 = ' hello ';
+
+let string3 = string2.trimStart();
+```
+# trimEnd
+trimEnd removes whitespace from the end of a string.
+```
+let string2 = ' hello ';
+
+let string3 = string2.trimEnd();
+```
+# String.fromCharCode
+fromCharCode converts Unicode values to characters.
+```
+let value = String.fromCharCode(104, 101, 108, 108, 111);
+```
+# String.fromCodePoint
+fromCodePoint returns a string created by using the specified sequence of code points.
+```
+let value = String.fromCodePoint(104, 101, 108, 108, 111);
+```
+# String.raw
+raw returns a string created by using the raw string and template literal.
+```
+let value = String.raw`Hello\nWorld`;
+```
+
+
+# Other useful methods 
+
+# isNaN
+isNaN determines whether a value is NaN or not.
+```
+let value = isNaN('hello');
+```
+# isFinite
+isFinite determines whether a value is a finite number.
+```
+let value = isFinite(Infinity);
+```
+# parseFloat
+parseFloat parses a string and returns a floating-point number.
+```
+let value = parseFloat('3.14');
+```
+# parseInt
+parseInt parses a string and returns an integer.
+```
+let value = parseInt('3.14');
+```
+# setTimeout
+setTimeout calls a function or evaluates an expression after a specified number of milliseconds.
+```
+setTimeout(() => console.log('Hello'), 1000);
+```
+# setInterval
+setInterval calls a function or evaluates an expression at specified intervals (in milliseconds).
+```
+setInterval(() => console.log('Hello'), 1000);
+```
+# clearInterval
+clearInterval stops the intervals set by setInterval.
+```
+let interval = setInterval(() => console.log('Hello'), 1000);
+
+clearInterval(interval);
+```
+# clearTimeout
+clearTimeout stops the timeouts set by setTimeout.
+```
+let timeout = setTimeout(() => console.log('Hello'), 1000);
+
+clearTimeout(timeout);
+```
+# Math.random
+random returns a random number between 0 (inclusive) and 1 (exclusive).
+```
+let value = Math.random();
+```
+# Math.floor
+floor returns the largest integer less than or equal to a given number.
+```
+let value = Math.floor(3.14);
+```
+# Math.ceil
+ceil returns the smallest integer greater than or equal to a given number.
+```
+let value = Math.ceil(3.14);
+```
+# Math.round
+round returns the value of a number rounded to the nearest integer.
+```
+let value = Math.round(3.14);
+```
+# Math.min
+min returns the smallest of zero or more numbers.
+```
+let value = Math.min(1, 2, 3, 4, 5);
+```
+# Math.max
+max returns the largest of zero or more numbers.
+```
+let value = Math.max(1, 2, 3, 4, 5);
+```
+# Math.abs
+abs returns the absolute value of a number.
+```
+let value = Math.abs(-3.14);
+```
+# Math.pow
+pow returns the base to the exponent power.
+```
+let value = Math.pow(2, 3);
+```
+# Math.sqrt
+sqrt returns the square root of a number.
+```
+let value = Math.sqrt(9);
+```
+
+
 
 
 
