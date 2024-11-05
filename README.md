@@ -1,7 +1,6 @@
 <details><summary> # example of interface / types / functions / enums / generics / namespaces / modules</summary>
 <p> 
 
-
 ## interface
 ```
 interface SomePerson {
@@ -19,8 +18,8 @@ user1 = {
         phrase = phrase + ' ' + this.name;
     }
 };
-
 ```
+
 ## type
 ```
 type AddFn = (a: number, b: number) => number;  // type alias for function type (function signature)  
@@ -36,15 +35,18 @@ let name2: string = 'Max';
 let age: number = 30;
 let hasHobbies: boolean = true;
 ```
+
 ## array types
 ```
 let hobbies: string[] = ['Sports', 'Cooking'];
 let hobbies2: any[] = ['Sports', 1, true];
 ```
+
 ## tuples
 ```
 let address: [string, number] = ['Superstreet', 99];
 ```
+
 ## enums
 ```
 enum Color {
@@ -56,8 +58,170 @@ enum Color {
 let myColor: Color = Color.Green;
 console.log(myColor);   // 1
 ```
-</p>
-</details>
+
+## union types
+```
+function combine(input1: number | string, input2: number | string) {
+    let result;
+    if (typeof input1 === 'number' && typeof input2 === 'number') {
+        result = input1 + input2;
+    } else {
+        result = input1.toString() + input2.toString();
+    }
+    return result;
+}
+
+const combinedAges = combine(30, 26);
+const combinedNames = combine('Max', 'Anna');
+```
+
+## literal types
+```
+function printText(s: string, alignment: 'left' | 'right' | 'center') {
+    console.log(s, alignment);
+}
+
+printText('Hello, world', 'left');
+```
+
+## type guards
+```
+type Admin = {
+    name: string;
+    privileges: string[];
+};
+
+type Employee = {
+    name: string;
+    startDate: Date;
+};
+
+type ElevatedEmployee = Admin & Employee;
+
+function printEmployeeInformation(emp: ElevatedEmployee) {
+    console.log('Name: ' + emp.name);
+    if ('privileges' in emp) {
+        console.log('Privileges: ' + emp.privileges);
+    }
+    if ('startDate' in emp) {
+        console.log('Start Date: ' + emp.startDate);
+    }
+}
+```
+
+## intersection types
+```
+type Combinable = string | number;
+type Numeric = number | boolean;
+
+type Universal = Combinable & Numeric;
+```
+
+## function overloads
+```
+function add(a: number, b: number): number;
+function add(a: string, b: string): string;
+function add(a: Combinable, b: Combinable) {
+    if (typeof a === 'string' || typeof b === 'string') {
+        return a.toString() + b.toString();
+    }
+    return a + b;
+}
+
+const result = add('Max', ' Schwarz');
+result.split(' ');
+```
+
+## optional chaining
+```
+const fetchedUserData = {
+    id: 'u1',
+    name: 'Max',
+    job: { title: 'CEO', description: 'My own company' }
+};
+
+console.log(fetchedUserData?.job?.title);
+```
+
+## nullish coalescing
+```
+const userInput = null;
+
+const storedData = userInput ?? 'DEFAULT';
+
+console.log(storedData);
+```
+
+## type assertions
+```
+let someValue: unknown = 'this is a string';
+
+let strLength: number = (someValue as string).length;
+```
+
+## index types
+```
+interface ErrorContainer {
+    [prop: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+    email: 'Not a valid email!',
+    username: 'Must start with a capital character!'
+};
+```
+
+## keyof type operator
+```
+type Person = {
+    name: string;
+    age: number;
+};
+
+function getProperty<T, K extends keyof T>(obj: T, key: K) {
+    return obj[key];
+}
+
+const person: Person = { name: 'Max', age: 30 };
+const personName = getProperty(person, 'name');
+```
+
+## mapped types
+```
+type ReadonlyPerson = {
+    readonly [K in keyof Person]: Person[K];
+};
+
+const readonlyPerson: ReadonlyPerson = { name: 'Max', age: 30 };
+// readonlyPerson.name = 'Anna'; // Error: Cannot assign to 'name' because it is a read-only property.
+```
+
+## conditional types
+```
+type NonNullable<T> = T extends null | undefined ? never : T;
+
+type Example = NonNullable<string | number | undefined>; // string | number
+```
+
+## utility types
+```
+type PartialPerson = Partial<Person>;
+const partialPerson: PartialPerson = { name: 'Max' };
+
+type RequiredPerson = Required<Person>;
+const requiredPerson: RequiredPerson = { name: 'Max', age: 30 };
+
+type ReadonlyPerson = Readonly<Person>;
+const readonlyPerson: ReadonlyPerson = { name: 'Max', age: 30 };
+
+type Record<K extends keyof any, T> = {
+    [P in K]: T;
+};
+const nameAgeMap: Record<string, number> = {
+    Max: 30,
+    Anna: 28
+};
+```
 
 <details><summary> Classes </summary>
 <p> 
@@ -1622,4 +1786,635 @@ console.log(hero.superpower());
 </p>
 </details>
 
+<details>
+<summary>Ultimate LeetCode Problem-Solving Cheatsheet</summary>
 
+### 1. Data Structure Fundamentals
+
+#### Arrays
+
+```typescript
+// Initialize
+const arr: number[] = [];
+const fixed: number[] = new Array(5).fill(0);  // [0,0,0,0,0]
+const matrix: number[][] = Array(3).fill(0).map(() => Array(4).fill(0));
+
+// Key Methods
+arr.push(1);       // Add to end: O(1)
+arr.pop();         // Remove from end: O(1)
+arr.unshift(1);    // Add to start: O(n)
+arr.shift();       // Remove from start: O(n)
+arr.splice(2,1);   // Remove at index: O(n)
+
+// Slice without modifying original
+const subArray = arr.slice(startIdx, endIdx);  // O(n)
+
+// Common Array Patterns
+const sum = arr.reduce((a, b) => a + b, 0);
+const max = Math.max(...arr);
+const min = Math.min(...arr);
+```
+
+#### Maps & Sets
+
+```typescript
+// Map for key-value pairs
+const map = new Map<string, number>();
+map.set("key", 1);
+map.get("key");
+map.has("key");
+map.delete("key");
+
+// Set for unique values
+const set = new Set<number>();
+set.add(1);
+set.has(1);
+set.delete(1);
+set.size;
+
+// Frequency Counter Pattern
+function createFrequencyMap(arr: number[]): Map<number, number> {
+    const freq = new Map();
+    for (const num of arr) {
+        freq.set(num, (freq.get(num) || 0) + 1);
+    }
+    return freq;
+}
+```
+
+### 2. Common Problem-Solving Patterns
+
+#### Two Pointers Pattern
+
+```typescript
+// Two pointers from ends (e.g., for sorted arrays)
+function twoSum(nums: number[], target: number): number[] {
+    let left = 0, right = nums.length - 1;
+    
+    while (left < right) {
+        const sum = nums[left] + nums[right];
+        if (sum === target) return [left, right];
+        if (sum < target) left++;
+        else right--;
+    }
+    return [];
+}
+
+// Fast & Slow Pointers (e.g., for linked lists)
+function hasCycle(head: ListNode | null): boolean {
+    let slow = head, fast = head;
+    
+    while (fast && fast.next) {
+        slow = slow!.next;
+        fast = fast.next.next;
+        if (slow === fast) return true;
+    }
+    return false;
+}
+```
+
+#### Sliding Window Pattern
+
+```typescript
+// Fixed Window
+function findMaxAverage(nums: number[], k: number): number {
+    let sum = nums.slice(0, k).reduce((a, b) => a + b, 0);
+    let max = sum;
+    
+    for (let i = k; i < nums.length; i++) {
+        sum = sum - nums[i - k] + nums[i];
+        max = Math.max(max, sum);
+    }
+    return max / k;
+}
+
+// Dynamic Window
+function longestSubstringWithoutRepeats(s: string): number {
+    const seen = new Set();
+    let left = 0, max = 0;
+    
+    for (let right = 0; right < s.length; right++) {
+        while (seen.has(s[right])) {
+            seen.delete(s[left]);
+            left++;
+        }
+        seen.add(s[right]);
+        max = Math.max(max, right - left + 1);
+    }
+    return max;
+}
+```
+
+#### Binary Search Pattern
+
+```typescript
+function binarySearch(nums: number[], target: number): number {
+    let left = 0, right = nums.length - 1;
+    
+    while (left <= right) {
+        const mid = left + Math.floor((right - left) / 2);
+        if (nums[mid] === target) return mid;
+        if (nums[mid] < target) left = mid + 1;
+        else right = mid - 1;
+    }
+    return -1;
+}
+
+// Binary Search on Answer Space
+function findMinimumTime(tasks: number[]): number {
+    let left = 1, right = 10**9;
+    
+    while (left < right) {
+        const mid = left + Math.floor((right - left) / 2);
+        if (canComplete(tasks, mid)) right = mid;
+        else left = mid + 1;
+    }
+    return left;
+}
+```
+
+### 3. Tree Traversal Patterns
+
+#### DFS (Depth-First Search)
+
+```typescript
+// Recursive DFS
+function dfs(root: TreeNode | null): void {
+    if (!root) return;
+    
+    // Pre-order
+    console.log(root.val);
+    dfs(root.left);
+    dfs(root.right);
+    
+    // In-order
+    // dfs(root.left);
+    // console.log(root.val);
+    // dfs(root.right);
+    
+    // Post-order
+    // dfs(root.left);
+    // dfs(root.right);
+    // console.log(root.val);
+}
+
+// Iterative DFS using Stack
+function dfsIterative(root: TreeNode | null): number[] {
+    if (!root) return [];
+    const result: number[] = [];
+    const stack = [root];
+    
+    while (stack.length) {
+        const node = stack.pop()!;
+        result.push(node.val);
+        if (node.right) stack.push(node.right);
+        if (node.left) stack.push(node.left);
+    }
+    return result;
+}
+```
+
+#### BFS (Breadth-First Search)
+
+```typescript
+function bfs(root: TreeNode | null): number[] {
+    if (!root) return [];
+    const result: number[] = [];
+    const queue = [root];
+    
+    while (queue.length) {
+        const levelSize = queue.length;
+        
+        for (let i = 0; i < levelSize; i++) {
+            const node = queue.shift()!;
+            result.push(node.val);
+            if (node.left) queue.push(node.left);
+            if (node.right) queue.push(node.right);
+        }
+    }
+    return result;
+}
+```
+
+### 4. Dynamic Programming Patterns
+
+#### Memoization Template
+
+```typescript
+function memoize<T, R>(fn: (...args: T[]) => R): (...args: T[]) => R {
+    const cache = new Map<string, R>();
+    
+    return (...args: T[]): R => {
+        const key = JSON.stringify(args);
+        if (cache.has(key)) return cache.get(key)!;
+        const result = fn(...args);
+        cache.set(key, result);
+        return result;
+    };
+}
+
+// Example Usage
+const fib = memoize((n: number): number => {
+    if (n <= 1) return n;
+    return fib(n - 1) + fib(n - 2);
+});
+```
+
+#### Tabulation Template
+
+```typescript
+function fibTabulation(n: number): number {
+    if (n <= 1) return n;
+    const dp = new Array(n + 1).fill(0);
+    dp[1] = 1;
+    
+    for (let i = 2; i <= n; i++) {
+        dp[i] = dp[i-1] + dp[i-2];
+    }
+    return dp[n];
+}
+```
+
+### 5. Graph Algorithms
+
+#### DFS for Graphs
+
+```typescript
+function dfsGraph(graph: Map<number, number[]>, start: number): Set<number> {
+    const visited = new Set<number>();
+    
+    function dfs(node: number): void {
+        visited.add(node);
+        for (const neighbor of graph.get(node) || []) {
+            if (!visited.has(neighbor)) {
+                dfs(neighbor);
+            }
+        }
+    }
+    
+    dfs(start);
+    return visited;
+}
+```
+
+#### BFS for Graphs
+
+```typescript
+function bfsGraph(graph: Map<number, number[]>, start: number): number[] {
+    const visited = new Set<number>();
+    const result: number[] = [];
+    const queue = [start];
+    visited.add(start);
+    
+    while (queue.length) {
+        const node = queue.shift()!;
+        result.push(node);
+        
+        for (const neighbor of graph.get(node) || []) {
+            if (!visited.has(neighbor)) {
+                visited.add(neighbor);
+                queue.push(neighbor);
+            }
+        }
+    }
+    return result;
+}
+```
+
+### 6. Useful Utility Functions
+
+#### Number Operations
+
+```typescript
+// GCD (Greatest Common Divisor)
+function gcd(a: number, b: number): number {
+    return b === 0 ? a : gcd(b, a % b);
+}
+
+// LCM (Least Common Multiple)
+function lcm(a: number, b: number): number {
+    return (a * b) / gcd(a, b);
+}
+
+// Check if number is prime
+function isPrime(n: number): boolean {
+    if (n <= 1) return false;
+    for (let i = 2; i <= Math.sqrt(n); i++) {
+        if (n % i === 0) return false;
+    }
+    return true;
+}
+```
+
+#### String Operations
+
+```typescript
+// Check if string is palindrome
+function isPalindrome(s: string): boolean {
+    return s === s.split('').reverse().join('');
+}
+
+// Count character frequency
+function charFrequency(s: string): Map<string, number> {
+    return s.split('').reduce((map, char) => {
+        map.set(char, (map.get(char) || 0) + 1);
+        return map;
+    }, new Map<string, number>());
+}
+```
+
+#### Array Operations
+
+```typescript
+// Custom sorting
+const customSort = arr.sort((a, b) => {
+    // Return negative if a should come before b
+    // Return positive if b should come before a
+    // Return 0 if order doesn't matter
+    return a - b;
+});
+
+// Find all permutations
+function permutations<T>(arr: T[]): T[][] {
+    if (arr.length <= 1) return [arr];
+    const result: T[][] = [];
+    
+    for (let i = 0; i < arr.length; i++) {
+        const current = arr[i];
+        const remaining = [...arr.slice(0, i), ...arr.slice(i + 1)];
+        const perms = permutations(remaining);
+        
+        for (const perm of perms) {
+            result.push([current, ...perm]);
+        }
+    }
+    return result;
+}
+### 7. HashMap Problem-Solving Pattern
+
+#### Basic HashMap Usage
+
+```typescript
+// Two Sum using HashMap
+function twoSum(nums: number[], target: number): number[] {
+    const map = new Map<number, number>();
+    
+    for (let i = 0; i < nums.length; i++) {
+        const complement = target - nums[i];
+        if (map.has(complement)) {
+            return [map.get(complement)!, i];
+        }
+        map.set(nums[i], i);
+    }
+    return [];
+}
+
+// Group Anagrams
+function groupAnagrams(strs: string[]): string[][] {
+    const map = new Map<string, string[]>();
+    
+    for (const str of strs) {
+        const key = str.split('').sort().join('');
+        if (!map.has(key)) map.set(key, []);
+        map.get(key)!.push(str);
+    }
+    
+    return Array.from(map.values());
+}
+
+// First Non-Repeating Character
+function firstUniqChar(s: string): number {
+    const freq = new Map<string, number>();
+    
+    // Count frequencies
+    for (const char of s) {
+        freq.set(char, (freq.get(char) || 0) + 1);
+    }
+    
+    // Find first unique
+    for (let i = 0; i < s.length; i++) {
+        if (freq.get(s[i]) === 1) return i;
+    }
+    return -1;
+}
+```
+
+#### Advanced HashMap Techniques
+
+```typescript
+// Using composite keys
+function pairsBySum(nums: number[]): Map<string, [number, number][]> {
+    const pairMap = new Map<string, [number, number][]>();
+    
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = i + 1; j < nums.length; j++) {
+            const sum = nums[i] + nums[j];
+            const key = `sum:${sum}`;
+            if (!pairMap.has(key)) pairMap.set(key, []);
+            pairMap.get(key)!.push([nums[i], nums[j]]);
+        }
+    }
+    return pairMap;
+}
+
+// Using HashMap for caching/memoization
+function memoizedFunction<T, R>(fn: (arg: T) => R): (arg: T) => R {
+    const cache = new Map<string, R>();
+    
+    return (arg: T): R => {
+        const key = JSON.stringify(arg);
+        if (!cache.has(key)) {
+            cache.set(key, fn(arg));
+        }
+        return cache.get(key)!;
+    };
+}
+```
+
+### 8. QuickSort Pattern
+
+#### Basic QuickSort Implementation
+
+```typescript
+function quickSort(arr: number[]): number[] {
+    if (arr.length <= 1) return arr;
+    
+    const pivot = arr[Math.floor(arr.length / 2)];
+    const left: number[] = [];
+    const middle: number[] = [];
+    const right: number[] = [];
+    
+    for (const num of arr) {
+        if (num < pivot) left.push(num);
+        else if (num > pivot) right.push(num);
+        else middle.push(num);
+    }
+    
+    return [...quickSort(left), ...middle, ...quickSort(right)];
+}
+
+// In-place QuickSort
+function quickSortInPlace(arr: number[], low: number = 0, high: number = arr.length - 1): void {
+    if (low < high) {
+        const pivotIndex = partition(arr, low, high);
+        quickSortInPlace(arr, low, pivotIndex - 1);
+        quickSortInPlace(arr, pivotIndex + 1, high);
+    }
+}
+
+function partition(arr: number[], low: number, high: number): number {
+    const pivot = arr[high];
+    let i = low - 1;
+    
+    for (let j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+    }
+    
+    [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+    return i + 1;
+}
+```
+
+#### QuickSelect Pattern (Finding Kth Element)
+
+```typescript
+function quickSelect(arr: number[], k: number): number {
+    function select(left: number, right: number, k: number): number {
+        if (left === right) return arr[left];
+        
+        const pivotIndex = partition(arr, left, right);
+        
+        if (k === pivotIndex) return arr[k];
+        if (k < pivotIndex) return select(left, pivotIndex - 1, k);
+        return select(pivotIndex + 1, right, k);
+    }
+    
+    return select(0, arr.length - 1, k - 1);
+}
+```
+
+### 9. Pass-by-Value vs Pass-by-Reference Pattern
+
+#### Understanding the Difference
+
+```typescript
+// Pass by Value (Primitives)
+function modifyPrimitive(x: number): number {
+    x = x + 1;
+    return x;
+}
+
+let num = 5;
+console.log(modifyPrimitive(num)); // 6
+console.log(num); // Still 5
+
+// Pass by Reference (Objects, Arrays)
+function modifyObject(obj: {value: number}): void {
+    obj.value = obj.value + 1;
+}
+
+let myObj = {value: 5};
+modifyObject(myObj);
+console.log(myObj.value); // 6
+```
+
+#### Common Patterns for Handling References
+
+```typescript
+// Cloning Objects
+function safeObjectModification<T extends object>(obj: T): T {
+    // Shallow clone
+    const shallowCopy = {...obj};
+    
+    // Deep clone
+    const deepCopy = JSON.parse(JSON.stringify(obj));
+    
+    return deepCopy;
+}
+
+// Immutable Array Operations
+function immutableArrayOperations(arr: number[]): number[] {
+    // Instead of arr.push(1)
+    const addedElement = [...arr, 1];
+    
+    // Instead of arr.pop()
+    const removedLast = arr.slice(0, -1);
+    
+    // Instead of arr.unshift(1)
+    const addedFirst = [1, ...arr];
+    
+    // Instead of arr.shift()
+    const removedFirst = arr.slice(1);
+    
+    return addedElement;
+}
+
+// Handling Nested Objects
+function handleNestedObjects(obj: any): any {
+    if (obj === null || typeof obj !== 'object') {
+        return obj;
+    }
+    
+    if (Array.isArray(obj)) {
+        return obj.map(item => handleNestedObjects(item));
+    }
+    
+    const newObj: any = {};
+    for (const key in obj) {
+        newObj[key] = handleNestedObjects(obj[key]);
+    }
+    return newObj;
+}
+```
+
+#### Practical Applications
+
+```typescript
+// Tree Node Cloning
+class TreeNode {
+    val: number;
+    left: TreeNode | null;
+    right: TreeNode | null;
+    
+    constructor(val: number) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+function cloneTree(root: TreeNode | null): TreeNode | null {
+    if (!root) return null;
+    
+    const newNode = new TreeNode(root.val);
+    newNode.left = cloneTree(root.left);
+    newNode.right = cloneTree(root.right);
+    
+    return newNode;
+}
+
+// Graph Clone with HashMap
+function cloneGraph(node: Node | null): Node | null {
+    if (!node) return null;
+    
+    const visited = new Map<Node, Node>();
+    
+    function dfs(node: Node): Node {
+        if (visited.has(node)) return visited.get(node)!;
+        
+        const clone = new Node(node.val);
+        visited.set(node, clone);
+        
+        for (const neighbor of node.neighbors) {
+            clone.neighbors.push(dfs(neighbor));
+        }
+        
+        return clone;
+    }
+    
+    return dfs(node);
+}
+```
